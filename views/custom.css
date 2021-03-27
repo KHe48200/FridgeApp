@@ -1,0 +1,146 @@
+/*Icon and search button colors and border size*/
+.icon-success {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    color: #155724;
+    border-color: #155724;
+    background: transparent;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.icon-warning {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    color: #856404;
+    border-color: #856404;
+    background: transparent;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.icon-warning:hover {
+    color: #f8f9fa
+}
+
+.icon-danger {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    color: #721c24;
+    border-color: #721c24;
+    background: transparent;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.icon-primary {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    color: #004085;
+    border-color: #004085;
+    background: transparent;
+}
+
+.icon-secondary {
+    color: #383d41;
+    border-color: #383d41;
+    background: transparent;
+    margin: 0.55rem 0.25rem 0.5rem 0.5rem;
+    padding: 0.2rem;
+}
+
+.fa-sort {
+    padding-left: 0.2rem;
+}
+.fa-sync {
+    padding-left: 0.45rem;
+}
+.fa-plus {
+    padding-left: 0.5rem;
+}
+.fa-trash-alt {
+    padding-left: 0.5rem;
+}
+
+/*Text form colors, borders and paddings*/
+.form-success, .form-success:focus, .form-success::placeholder {
+    color: #155724;
+    border-color: #155724;
+    font-weight: 500; 
+    background: transparent;
+}
+
+.form-warning, .form-warning:focus, .form-warning::placeholder{
+    color: #856404;
+    border-color: #856404;
+    font-weight: 500; 
+    background: transparent;
+}
+
+.form-danger, .form-danger:focus, .form-danger::placeholder {
+    color: #721c24;
+    border-color: #721c24;
+    font-weight: 500; 
+    background: transparent;
+}
+
+.form-primary, .form-primary:focus, .form-primary::placeholder {
+    color: #004085;
+    border-color: #004085;
+    font-weight: 500; 
+    background: transparent;
+}
+
+.form-secondary, .form-secondary:focus, .form-secondary::placeholder {
+    color: #383d41;
+    border-color: #383d41;
+    font-weight: 500; 
+    background: transparent;
+}
+
+.form-control {
+    height: 2rem;
+    padding: 0.2rem;
+}
+
+.list-group-item {
+    height: 3.1rem;
+    padding: 0.5rem;
+}
+
+.col-1 {
+    padding: 0;
+}
+
+/* Dropdown button colors */
+/*.btn-warning {
+    background: #ffeeba;
+    border-color: #ffeeba;
+    color: #856404;
+}
+
+.btn-warning:hover {
+    color: #f8f9fa
+}
+
+.btn-secondary {
+    background: #d6d8db;
+    border-color: #d6d8db;
+    color: #383d41;
+}
+
+.btn-danger {
+    background: #f5c6cb;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.btn-success {
+    background: #c3e6cb;
+    border-color: #c3e6cb;
+    color: #155724;
+}*/

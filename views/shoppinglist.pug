@@ -1,0 +1,122 @@
+doctype html
+html
+    head
+        //meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
+        script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous")
+        script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous")
+        script(src="https://kit.fontawesome.com/f6a90f8186.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js")
+        style
+            include custom.css
+
+    body.container
+        ul.nav.nav-tabs
+            li.nav-item
+                a(class='nav-link' href='/fridge') FRIDGE
+            li.nav-item
+                a(class='nav-link active') SHOPPING LIST
+        
+        h3='My shopping list'
+
+        <!-- List.js "products" div -->
+        div(id="products")
+
+            <!-- Sort -->
+            div.row
+                <!-- Sort buttons -->
+                div.col-12.col-md-12
+                    <!-- Sort by name -->
+                    if path === '/shoppinglist'
+                        a.btn.btn-secondary.icon-secondary.float-right(href="shoppinglistnamedesc") Sort by name
+                            span.fas.fa-sort
+                    else
+                        a.btn.btn-secondary.icon-secondary.float-right(href="shoppinglist") Sort by name
+                            span.fas.fa-sort
+                    <!-- Sort by status -->
+                    if path === '/shoppinglistrunasc'
+                        a.btn.btn-secondary.icon-secondary.float-right(href="shoppinglistrundesc") Sort by status
+                            span.fas.fa-sort
+                    else
+                        a.btn.btn-secondary.icon-secondary.float-right(href="shoppinglistrunasc") Sort by status
+                            span.fas.fa-sort
+            <!-- Search... -->
+            li.list-group-item.list-group-item-secondary
+                div.row        
+                    <!-- Search text field -->            
+                    div.col-12.col-md-12
+                        input.search.form-control.form-secondary(placeholder="Search...")
+
+            <!-- Add new product... -->
+            li.list-group-item.list-group-item-primary
+                <!-- form -->
+                form#form(action='/shoppinglist', method='POST' autocomplete="off")
+                    div.form-group
+                        div.row
+                            <!-- Add product text field -->
+                            div.input-group.col-12.col-md-12
+                                input.form-control.form-primary(type='text', name='name', placeholder='Add new product...')
+                                div.input-group-append
+                                    button.btn.btn-primary.icon-primary.input-group-text(type='submit')
+                                        span.fas.fa-plus
+            ul.list-group.list
+                each shoppingListProduct in shoppingList_Product
+                    if shoppingListProduct.runningOut === true
+                        li.list-group-item.list-group-item-warning
+                            form#form(action='/shoppinglistupdate/'+shoppingListProduct.id, method='POST' autocomplete="off")
+                                    div.form-group(style="margin-bottom: 0;")
+                                        div.row
+                                            <!-- Product name in text field -->
+                                            div.input-group.col-12.col-md-12.name
+                                                input.form-control.form-warning(type='text', name='name', placeholder='Product name', value=shoppingListProduct.name)
+                                                div.input-group-append
+                                                    <!-- Dropdown button -->
+                                                    div.dropdown.col-1.col-md-1
+                                                        <!-- Dropdown icon -->
+                                                        button.btn.btn-warning.icon-warning(href='#' type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                                                            span.fas.fa-ellipsis-v
+                                                        <!-- Dropdown menu -->
+                                                        div.dropdown-menu.dropdown-menu-right(aria-labelledby="dropdownMenuButton" style="background: transparent")
+                                                            <!-- Delete -->
+                                                            a.btn.btn-secondary.w-100(style="margin-bottom: 0.2rem" href='/deleteshoppinglist/'+shoppingListProduct.id+'/name/'+shoppingListProduct.name) Delete
+                                                            <!-- Got It -->
+                                                            a.btn.btn-success.w-100(href='/gotit/'+shoppingListProduct.id+'/name/'+shoppingListProduct.name) Got It
+
+                                            <!-- Hidden true/false text used for "Sort by status" -->
+                                            div.runningOut(style="display: none")
+                                                p=shoppingListProduct.runningOut
+                                            
+                    else
+                        li.list-group-item.list-group-item-danger
+                            <!-- form for displaying and updating each product NOT running out-->
+                            form#form(action='/shoppinglistupdate/'+shoppingListProduct.id, method='POST' autocomplete="off")
+                                div.form-group
+                                    div.row
+                                        <!-- Product name in text field -->
+                                        div.input-group.col-12.col-md-12.name
+                                            input.form-control.form-danger(type='text', name='name', placeholder='Product name', value=shoppingListProduct.name)
+                                            div.input-group-append
+                                                <!-- Dropdown button -->
+                                                div.dropdown.col-1.col-md-1
+                                                    <!-- Dropdown icon -->
+                                                    button.btn.btn-danger.icon-danger(type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                                                        span.fas.fa-ellipsis-v
+                                                    <!-- Dropdown menu -->
+                                                    div.dropdown-menu.dropdown-menu-right(aria-labelledby="dropdownMenuButton" style="background: transparent")
+                                                        <!-- Delete -->
+                                                        a.btn.btn-secondary.w-100(style="margin-bottom: 0.2rem" href='/deleteshoppinglist/'+shoppingListProduct.id+'/name/'+shoppingListProduct.name) Delete
+                                                        <!-- Got It -->
+                                                        a.btn.btn-success.w-100(href='/gotit/'+shoppingListProduct.id+'/name/'+shoppingListProduct.name) Got It
+
+                                        <!-- Hidden true/false text used for "Sort by status" -->
+                                        div.runningOut(style="display: none")
+                                            p=shoppingListProduct.runningOut
+
+<!-- Script used with List.js (by Jonny Strömberg) to search products by name. https://github.com/javve/list.js -->
+script.
+    var options = {
+        valueNames: [ 'name', 'runningOut' ]
+    };
+    var productList = new List('products', options);                                        

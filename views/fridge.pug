@@ -1,0 +1,131 @@
+doctype html
+html
+    head
+        //meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
+        script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous")
+        script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous")
+        script(src="https://kit.fontawesome.com/f6a90f8186.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js")
+        style
+            include custom.css
+
+    body.container
+        ul.nav.nav-tabs
+            li.nav-item
+                a.nav-link.active FRIDGE
+            li.nav-item
+                a.nav-link(href='/shoppinglist') SHOPPING LIST
+
+        <!-- Heading -->
+        h3='My fridge'
+
+        <!-- List.js "products" div -->
+        div(id="products")
+
+            <!-- Sort -->
+            div.row
+                <!-- Sort buttons -->
+                div.col-12.col-md-12
+                    <!-- Sort by name -->
+                    if path === '/fridge'
+                        a.btn.btn-secondary.icon-secondary.float-right(href="fridgenamedesc") Sort by name
+                            span.fas.fa-sort
+                    else
+                        a.btn.btn-secondary.icon-secondary.float-right(href="fridge") Sort by name
+                            span.fas.fa-sort
+                    <!-- Sort by status -->
+                    if path === '/fridgerunasc'
+                        a.btn.btn-secondary.icon-secondary.float-right(href="fridgerundesc") Sort by status
+                            span.fas.fa-sort
+                    else
+                        a.btn.btn-secondary.icon-secondary.float-right(href="fridgerunasc") Sort by status
+                            span.fas.fa-sort
+            <!-- Search... -->
+            li.list-group-item.list-group-item-secondary
+                div.row        
+                    <!-- Search text field -->            
+                    div.col-12.col-md-12
+                        input.search.form-control.form-secondary(placeholder="Search...")
+
+            <!-- Add new product... -->
+            li.list-group-item.list-group-item-primary
+                <!-- form -->
+                form#form(action='/fridge', method='POST' autocomplete="off")
+                    div.form-group
+                        div.row
+                            <!-- Add product text field -->
+                            div.input-group.col-12.col-md-12
+                                input.form-control.form-primary(type='text', name='name', placeholder='Add new product...')
+                                div.input-group-append
+                                    button.btn.btn-primary.icon-primary.input-group-text(type='submit')
+                                        span.fas.fa-plus
+                    
+            <!-- Fridge products -->
+            ul.list-group.list
+                each fridgeProduct in fridge_Product
+                    if fridgeProduct.runningOut === true
+                        li.list-group-item.list-group-item-warning
+                            <!-- form for displaying and updating each product RUNNING OUT -->
+                            form#form(action='/fridgeupdate/'+fridgeProduct.id, method='POST' autocomplete="off")
+                                div.form-group(style="margin-bottom: 0;")
+                                    div.row
+                                        <!-- Product name in text field -->
+                                        div.input-group.col-12.col-md-12.name
+                                            input.form-control.form-warning(type='text', name='name', placeholder='Product name', value=fridgeProduct.name)
+                                            div.input-group-append
+                                                <!-- Dropdown button -->
+                                                div.dropdown.col-1.col-md-1
+                                                    <!-- Dropdown icon -->
+                                                    button.btn.btn-warning.icon-warning(type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                                                        span.fas.fa-ellipsis-v
+                                                    <!-- Dropdown menu -->
+                                                    div.dropdown-menu.dropdown-menu-right(aria-labelledby="dropdownMenuButton" style="background: transparent")
+                                                        <!-- Delete -->
+                                                        a.btn.btn-secondary.w-100(style="margin-bottom: 0.2rem" href='/deletefridge/'+fridgeProduct.id+'/name/'+fridgeProduct.name) Delete
+                                                        <!-- Running Out -->
+                                                        a.btn.btn-warning.w-100(style="margin-bottom: 0.2rem" href='/runningout/'+fridgeProduct.id+'/name/'+fridgeProduct.name+'/runningout/'+fridgeProduct.runningOut) Running out
+                                                        <!-- Run Out -->
+                                                        a.btn.btn-danger.w-100(href='/runout/'+fridgeProduct.id+'/name/'+fridgeProduct.name) Run out
+                                        
+                                        <!-- Hidden true/false text used for "Sort by status" -->
+                                        div.runningOut(style="display: none")
+                                            p=fridgeProduct.runningOut
+
+                                                
+                    else
+                        li.list-group-item.list-group-item-success
+                            <!-- form for displaying and updating each product NOT running out-->
+                            form#form(action='/fridgeupdate/'+fridgeProduct.id, method='POST' autocomplete="off")
+                                div.form-group
+                                    div.row
+                                        <!-- Product name in text field -->
+                                        div.input-group.col-12.col-md-12.name
+                                            input.form-control.form-success(type='text', name='name', placeholder='Product name', value=fridgeProduct.name)
+                                            div.input-group-append
+                                                <!-- Dropdown button -->
+                                                div.dropdown.col-1.col-md-1
+                                                    <!-- Dropdown icon -->
+                                                    button.btn.btn-success.icon-success(type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                                                        span.fas.fa-ellipsis-v
+                                                    <!-- Dropdown menu -->
+                                                    div.dropdown-menu.dropdown-menu-right(aria-labelledby="dropdownMenuButton" style="background: transparent")
+                                                        <!-- Delete -->
+                                                        a.btn.btn-secondary.w-100(style="margin-bottom: 0.2rem" href='/deletefridge/'+fridgeProduct.id+'/name/'+fridgeProduct.name) Delete
+                                                        <!-- Running Out -->
+                                                        a.btn.btn-warning.w-100(style="margin-bottom: 0.2rem" href='/runningout/'+fridgeProduct.id+'/name/'+fridgeProduct.name+'/runningout/'+fridgeProduct.runningOut) Running out
+                                                        <!-- Run Out -->
+                                                        a.btn.btn-danger.w-100(href='/runout/'+fridgeProduct.id+'/name/'+fridgeProduct.name) Run out 
+
+                                        <!-- Hidden true/false text used for "Sort by status" -->
+                                        div.runningOut(style="display: none")
+                                            p=fridgeProduct.runningOut
+
+<!-- Script used with List.js (by Jonny Strömberg) to search products by name. https://github.com/javve/list.js -->
+script.
+    var options = {
+        valueNames: [ 'name', 'runningOut' ]
+    };
+    var productList = new List('products', options);     
