@@ -1,6 +1,6 @@
 # Fridge App 
 
-[Description](https://github.com/kalleheini1994/FridgeApp#description)  |  [Install](https://github.com/kalleheini1994/FridgeApp#install)  |  [Getting started](https://github.com/kalleheini1994/FridgeApp#getting-started)
+[Description](https://github.com/KHe48200/FridgeApp#description)  |  [Install](https://github.com/KHe48200/FridgeApp#install)  |  [Getting started](https://github.com/KHe48200/FridgeApp#getting-started)
 
 ## Description
 
@@ -36,20 +36,20 @@ Fridge app is built using:
 
 ### Adding products
 This is used to add products to either fridge of shopping list
-![alt text](https://github.com/kalleheini1994/FridgeApp/blob/master/images/productAdd.gif "Add product to fridge")
+![alt text](https://github.com/KHe48200/FridgeApp/blob/master/images/productAdd.gif "Add product to fridge")
 ### Running out
 Product marked as running out it will change to yellow. This also adds this item to your shopping list as running out (yellow).
-![alt text](https://github.com/kalleheini1994/FridgeApp/blob/master/images/productRunningOut.gif "Mark product as running out")
+![alt text](https://github.com/KHe48200/FridgeApp/blob/master/images/productRunningOut.gif "Mark product as running out")
 ### Run out
 Product marked as run out it will change to red. This removes this item from fridge and adds it to shopping list as run out (red).
 
-![alt text](https://github.com/kalleheini1994/FridgeApp/blob/master/images/productRunOut.gif "Mark product as run out")
+![alt text](https://github.com/KHe48200/FridgeApp/blob/master/images/productRunOut.gif "Mark product as run out")
 ### Got it
 Product marked as gotten will be removed from shopping list and added to fridge
-![alt text](https://github.com/kalleheini1994/FridgeApp/blob/master/images/productGotIt.gif "Sort by name")
+![alt text](https://github.com/KHe48200/FridgeApp/blob/master/images/productGotIt.gif "Sort by name")
 ### Sorting products 
 Products can be sorted either alphabetically or by status
-![alt text](https://github.com/kalleheini1994/FridgeApp/blob/master/images/productSortByName.gif "Got it") ![alt text](https://github.com/kalleheini1994/FridgeApp/blob/master/images/productSortByStatus.gif "Sort by status")
+![alt text](https://github.com/KHe48200/FridgeApp/blob/master/images/productSortByName.gif "Got it") ![alt text](https://github.com/KHe48200/FridgeApp/blob/master/images/productSortByStatus.gif "Sort by status")
 ### Searching products
 Products can be searched using their names
-![alt text](https://github.com/kalleheini1994/FridgeApp/blob/master/images/productSearchByName.gif "Search")
+![alt text](https://github.com/KHe48200/FridgeApp/blob/master/images/productSearchByName.gif "Search")
